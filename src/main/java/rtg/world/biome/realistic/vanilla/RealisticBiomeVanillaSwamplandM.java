@@ -17,8 +17,11 @@ import rtg.api.world.gen.feature.tree.rtg.TreeRTGPinusPonderosa;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTGSalixMyrtilloides;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
+import ru.craftlogic.common.block.BlockPlanks2;
 
 import java.util.Random;
+
+import static ru.craftlogic.common.block.BlockPlanks2.PlanksType2.PINE;
 
 
 public class RealisticBiomeVanillaSwamplandM extends RealisticBiomeBase {
@@ -58,8 +61,8 @@ public class RealisticBiomeVanillaSwamplandM extends RealisticBiomeBase {
     public void initDecos() {
 
         TreeRTG myrtilloidesTree = new TreeRTGSalixMyrtilloides();
-        myrtilloidesTree.setLogBlock(Blocks.LOG.getDefaultState());
-        myrtilloidesTree.setLeavesBlock(Blocks.LEAVES.getDefaultState());
+        myrtilloidesTree.setLogBlock(BlockUtil.getStateLog(BlockPlanks2.PlanksType2.WILLOW));
+        myrtilloidesTree.setLeavesBlock(BlockUtil.getStateLeaf(BlockPlanks2.PlanksType2.WILLOW));
         this.addTree(myrtilloidesTree);
 
         DecoTree decoTrees = new DecoTree(myrtilloidesTree);
@@ -75,8 +78,8 @@ public class RealisticBiomeVanillaSwamplandM extends RealisticBiomeBase {
         this.addDeco(decoTrees);
 
         TreeRTG ponderosaTree = new TreeRTGPinusPonderosa();
-        ponderosaTree.setLogBlock(Blocks.LOG.getDefaultState());
-        ponderosaTree.setLeavesBlock(Blocks.LEAVES.getDefaultState());
+        ponderosaTree.setLogBlock(BlockUtil.getStateLog(PINE));
+        ponderosaTree.setLeavesBlock(BlockUtil.getStateLeaf(PINE));
         ponderosaTree.setMinTrunkSize(3);
         ponderosaTree.setMaxTrunkSize(6);
         ponderosaTree.setMinCrownSize(6);

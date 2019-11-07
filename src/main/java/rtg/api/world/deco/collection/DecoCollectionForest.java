@@ -1,6 +1,5 @@
 package rtg.api.world.deco.collection;
 
-import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.feature.WorldGenTrees;
@@ -32,6 +31,8 @@ import static net.minecraft.block.BlockFlower.EnumFlowerType.PINK_TULIP;
 import static net.minecraft.block.BlockFlower.EnumFlowerType.POPPY;
 import static net.minecraft.block.BlockFlower.EnumFlowerType.RED_TULIP;
 import static net.minecraft.block.BlockFlower.EnumFlowerType.WHITE_TULIP;
+import static net.minecraft.block.BlockPlanks.EnumType.SPRUCE;
+import static ru.craftlogic.common.block.BlockPlanks2.PlanksType2.PINE;
 
 
 /**
@@ -67,8 +68,8 @@ public class DecoCollectionForest extends DecoCollectionBase {
 
     private DecoHelper5050 tallTrees(float noiseMin, float noiseMax) {
         return new DecoHelper5050(
-            tallPineTrees(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState(), noiseMin, noiseMax),
-            tallPineTrees(BlockUtil.getStateLog(EnumType.SPRUCE), BlockUtil.getStateLeaf(EnumType.SPRUCE), noiseMin, noiseMax)
+            tallPineTrees(BlockUtil.getStateLog(PINE), BlockUtil.getStateLeaf(PINE), noiseMin, noiseMax),
+            tallPineTrees(BlockUtil.getStateLog(SPRUCE), BlockUtil.getStateLeaf(SPRUCE), noiseMin, noiseMax)
         );
     }
 
@@ -97,8 +98,8 @@ public class DecoCollectionForest extends DecoCollectionBase {
 
     private DecoHelper5050 shortTrees(float noiseMin, float noiseMax) {
         return new DecoHelper5050(
-            shortPineTrees(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState(), noiseMin, noiseMax),
-            shortPineTrees(BlockUtil.getStateLog(EnumType.SPRUCE), BlockUtil.getStateLeaf(EnumType.SPRUCE), noiseMin, noiseMax)
+            shortPineTrees(BlockUtil.getStateLog(PINE), BlockUtil.getStateLeaf(PINE), noiseMin, noiseMax),
+            shortPineTrees(BlockUtil.getStateLog(SPRUCE), BlockUtil.getStateLeaf(SPRUCE), noiseMin, noiseMax)
         );
     }
 
@@ -134,8 +135,8 @@ public class DecoCollectionForest extends DecoCollectionBase {
     private DecoTree randomPungensTrees() {
 
         TreeRTG piceaPungens = new TreeRTGPiceaPungens()
-            .setLogBlock(Blocks.LOG.getDefaultState())
-            .setLeavesBlock(Blocks.LEAVES.getDefaultState())
+            .setLogBlock(BlockUtil.getStateLog(PINE))
+            .setLeavesBlock(BlockUtil.getStateLeaf(PINE))
             .setMinTrunkSize(2)
             .setMaxTrunkSize(4)
             .setMinCrownSize(5)
@@ -164,16 +165,16 @@ public class DecoCollectionForest extends DecoCollectionBase {
     }
 
     private DecoHelper5050 logs() {
-        return new DecoHelper5050(oakLogs(), spruceLogs());
+        return new DecoHelper5050(pineLogs(), spruceLogs());
     }
 
-    private DecoFallenTree oakLogs() {
+    private DecoFallenTree pineLogs() {
         return new DecoFallenTree()
             .setLogCondition(LogCondition.RANDOM_CHANCE)
             .setLogConditionChance(16)
             .setMaxY(80)
-            .setLogBlock(Blocks.LOG.getDefaultState())
-            .setLeavesBlock(Blocks.LEAVES.getDefaultState())
+            .setLogBlock(BlockUtil.getStateLog(PINE))
+            .setLeavesBlock(BlockUtil.getStateLeaf(PINE))
             .setMinSize(3)
             .setMaxSize(6);
     }
@@ -183,8 +184,8 @@ public class DecoCollectionForest extends DecoCollectionBase {
             .setLogCondition(LogCondition.RANDOM_CHANCE)
             .setLogConditionChance(24)
             .setMaxY(80)
-            .setLogBlock(BlockUtil.getStateLog(EnumType.SPRUCE))
-            .setLeavesBlock(BlockUtil.getStateLeaf(EnumType.SPRUCE))
+            .setLogBlock(BlockUtil.getStateLog(SPRUCE))
+            .setLeavesBlock(BlockUtil.getStateLeaf(SPRUCE))
             .setMinSize(3)
             .setMaxSize(6);
     }
@@ -198,8 +199,8 @@ public class DecoCollectionForest extends DecoCollectionBase {
 
     private DecoShrub shrubsSpruce() {
         return new DecoShrub()
-            .setLogBlock(BlockUtil.getStateLog(EnumType.SPRUCE))
-            .setLeavesBlock(BlockUtil.getStateLeaf(EnumType.SPRUCE))
+            .setLogBlock(BlockUtil.getStateLog(SPRUCE))
+            .setLeavesBlock(BlockUtil.getStateLeaf(SPRUCE))
             .setMaxY(140)
             .setLoopMultiplier(4f)
             .setChance(9);

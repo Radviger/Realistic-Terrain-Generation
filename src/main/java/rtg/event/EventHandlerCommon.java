@@ -119,7 +119,9 @@ public final class EventHandlerCommon
         // First, let's get all of the trees in this biome that match the sapling on the ground.
         List<TreeRTG> validTrees = biomeTrees.stream()
             .filter(tree-> saplingBlock.getBlock() == tree.getSaplingBlock().getBlock() &&
-                BlockUtil.getTypeFromSapling(saplingBlock) == BlockUtil.getTypeFromSapling(tree.getSaplingBlock()))
+                    (BlockUtil.getTypeFromSapling(saplingBlock) == BlockUtil.getTypeFromSapling(tree.getSaplingBlock())
+                || BlockUtil.getTypeFromSapling2(saplingBlock) == BlockUtil.getTypeFromSapling2(tree.getSaplingBlock()))
+            )
             .collect(Collectors.toList());
 
         // Abort if there are no valid trees.

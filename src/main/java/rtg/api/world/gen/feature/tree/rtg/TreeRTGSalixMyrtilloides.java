@@ -8,6 +8,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import rtg.RTGConfig;
+import rtg.api.util.BlockUtil;
+import ru.craftlogic.common.block.BlockPlanks2;
+
+import static ru.craftlogic.common.block.BlockPlanks2.PlanksType2.WILLOW;
 
 
 /**
@@ -37,10 +41,8 @@ public class TreeRTGSalixMyrtilloides extends TreeRTG {
      * this.addDeco(decoTree);
      */
     public TreeRTGSalixMyrtilloides() {
-
         super();
-
-        this.setLogBlock(Blocks.LOG.getDefaultState()).setLeavesBlock(Blocks.LEAVES.getDefaultState());
+        this.setLogBlock(BlockUtil.getStateLog(WILLOW)).setLeavesBlock(BlockUtil.getStateLeaf(WILLOW));
     }
 
     @Override

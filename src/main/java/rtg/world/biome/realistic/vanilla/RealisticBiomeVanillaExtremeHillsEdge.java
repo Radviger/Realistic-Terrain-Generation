@@ -17,6 +17,7 @@ import rtg.api.world.gen.feature.tree.rtg.TreeRTG;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTGPinusNigra;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
+import ru.craftlogic.common.block.BlockPlanks2;
 
 import java.util.Random;
 
@@ -57,8 +58,8 @@ public class RealisticBiomeVanillaExtremeHillsEdge extends RealisticBiomeBase {
     public void initDecos() {
 
         TreeRTG nigraTree = new TreeRTGPinusNigra();
-        nigraTree.setLogBlock(Blocks.LOG.getDefaultState());
-        nigraTree.setLeavesBlock(Blocks.LEAVES.getDefaultState());
+        nigraTree.setLogBlock(BlockUtil.getStateLog(BlockPlanks2.PlanksType2.PINE));
+        nigraTree.setLeavesBlock(BlockUtil.getStateLeaf(BlockPlanks2.PlanksType2.PINE));
         nigraTree.setMinTrunkSize(18);
         nigraTree.setMaxTrunkSize(27);
         nigraTree.setMinCrownSize(7);

@@ -38,6 +38,12 @@ import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
 
 import org.apache.commons.lang3.StringUtils;
+import ru.craftlogic.api.CraftBlocks;
+import ru.craftlogic.common.block.BlockLeaves3;
+import ru.craftlogic.common.block.BlockLog3;
+import ru.craftlogic.common.block.BlockPlanks2;
+import ru.craftlogic.common.block.BlockPlanks2.PlanksType2;
+import ru.craftlogic.common.block.BlockSapling2;
 
 
 /**
@@ -391,6 +397,17 @@ public final class BlockUtil {
     }
 
     /**
+     * A shortcut to get a specific variant of {@code craftlogic:log3}.
+     *
+     * @param variant An enum used for the {@link IProperty} variant.
+     * @return The requested variant of {@link IBlockState}.
+     * @since 1.0.0
+     */
+    public static IBlockState getStateLog(final PlanksType2 variant) {
+        return CraftBlocks.LOG3.getDefaultState().withProperty(BlockLog3.VARIANT, variant);
+    }
+
+    /**
      * A shortcut to get a specific variant of {@code minecraft:leaves} or {@code minecraft:leaves2}.
      *
      * @param variant An enum used for the {@link IProperty} variant.
@@ -416,6 +433,17 @@ public final class BlockUtil {
     }
 
     /**
+     * A shortcut to get a specific variant of {@code craftlogic:leaves3}.
+     *
+     * @param variant An enum used for the {@link IProperty} variant.
+     * @return The requested variant of {@link IBlockState}.
+     * @since 1.0.0
+     */
+    public static IBlockState getStateLeaf(final PlanksType2 variant) {
+        return CraftBlocks.LEAVES3.getDefaultState().withProperty(BlockLeaves3.VARIANT, variant);
+    }
+
+    /**
      * A shortcut to get a specific variant of {@code minecraft:sapling}.
      *
      * @param type An enum used for the {@link IProperty} type.
@@ -423,21 +451,7 @@ public final class BlockUtil {
      * @since 1.0.0
      */
     public static IBlockState getStateSapling(final BlockPlanks.EnumType type) {
-        switch (type) {
-            case OAK:
-                return Blocks.SAPLING.getDefaultState();
-            case SPRUCE:
-                return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.SPRUCE);
-            case BIRCH:
-                return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.BIRCH);
-            case JUNGLE:
-                return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.JUNGLE);
-            case ACACIA:
-                return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.ACACIA);
-            case DARK_OAK:
-                return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.DARK_OAK);
-        }
-        return Blocks.SAPLING.getDefaultState();
+        return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, type);
     }
 
     /**
@@ -512,7 +526,7 @@ public final class BlockUtil {
      */
     public static IBlockState getSaplingFromLeaves(IBlockState leaves, IBlockState fallback) {
         IBlockState ret;
-        return (ret = getSaplingFromLeaves(leaves)) != null ? ret : fallback;
+        return (ret = getSaplingFromLeaves(leaves)) != null || (ret = getSaplingFromLeaves2(leaves)) != null ? ret : fallback;
     }
 
     /**
@@ -528,14 +542,24 @@ public final class BlockUtil {
         BlockPlanks.EnumType type = (BlockPlanks.EnumType) leaves.getProperties().get(BlockOldLeaf.VARIANT);
         if (type == null) { type = (BlockPlanks.EnumType) leaves.getProperties().get(BlockNewLeaf.VARIANT); }
         if (type != null) {
-            switch (type) {
-                case OAK     : return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.OAK);
-                case SPRUCE  : return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.SPRUCE);
-                case BIRCH   : return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.BIRCH);
-                case JUNGLE  : return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.JUNGLE);
-                case ACACIA  : return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.ACACIA);
-                case DARK_OAK: return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.DARK_OAK);
-            }
+            return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, type);
+        }
+        return null;
+    }
+
+    /**
+     *  Gets an IBlockState of a sapling that matches the passed leaf blockstate
+     *
+     * @param leaves a block state
+     * @return a matching sapling blockstate if the passed leaf block has the correct IProperty and value, or null otherwise.
+     * @since 1.0.0
+     */
+    @Nullable
+    public static IBlockState getSaplingFromLeaves2(IBlockState leaves) {
+        if (!(leaves.getBlock() instanceof BlockLeaves3)) { return null; }
+        PlanksType2 type = (PlanksType2) leaves.getProperties().get(BlockLeaves3.VARIANT);
+        if (type != null) {
+            return CraftBlocks.SAPLING2.getDefaultState().withProperty(BlockSapling2.VARIANT, type);
         }
         return null;
     }
@@ -553,6 +577,23 @@ public final class BlockUtil {
         if (!(sapling.getBlock() instanceof BlockSapling)) { return null; }
         BlockPlanks.EnumType ret = null;
         try { ret = sapling.getValue(BlockSapling.TYPE); }
+        catch (IllegalArgumentException ignore) {}
+        return ret;
+    }
+
+    /**
+     *  Attempts to get a type value for a state of a craftlogic sapling.
+     *
+     * @param sapling any IBlockState
+     * @return the {@link PlanksType2} for sapling state VARIANT value if the input
+     * state is an instance of BlockSapling and the sapling is craftlogic, or null otherwise.
+     * @since 1.0.0
+     */
+    @Nullable
+    public static PlanksType2 getTypeFromSapling2(IBlockState sapling) {
+        if (!(sapling.getBlock() instanceof BlockSapling)) { return null; }
+        PlanksType2 ret = null;
+        try { ret = sapling.getValue(BlockSapling2.VARIANT); }
         catch (IllegalArgumentException ignore) {}
         return ret;
     }

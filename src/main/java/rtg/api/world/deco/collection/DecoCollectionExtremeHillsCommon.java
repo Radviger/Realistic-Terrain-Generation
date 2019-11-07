@@ -9,6 +9,8 @@ import rtg.api.world.deco.*;
 import rtg.api.world.deco.helper.DecoHelper5050;
 
 import static net.minecraft.block.BlockFlower.EnumFlowerType.*;
+import static net.minecraft.block.BlockPlanks.EnumType.SPRUCE;
+import static ru.craftlogic.common.block.BlockPlanks2.PlanksType2.PINE;
 
 
 /**
@@ -46,8 +48,8 @@ public class DecoCollectionExtremeHillsCommon extends DecoCollectionBase {
 
     private DecoHelper5050 logDecos() {
         return new DecoHelper5050(
-            logs(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState()),
-            logs(BlockUtil.getStateLog(EnumType.SPRUCE), BlockUtil.getStateLeaf(EnumType.SPRUCE))
+            logs(BlockUtil.getStateLog(PINE), BlockUtil.getStateLeaf(PINE)),
+            logs(BlockUtil.getStateLog(SPRUCE), BlockUtil.getStateLeaf(SPRUCE))
         );
     }
 
@@ -63,8 +65,8 @@ public class DecoCollectionExtremeHillsCommon extends DecoCollectionBase {
 
     private DecoHelper5050 shrubDecos() {
         return new DecoHelper5050(
-            shrubs(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState()),
-            shrubs(BlockUtil.getStateLog(EnumType.SPRUCE), BlockUtil.getStateLeaf(EnumType.SPRUCE))
+            shrubs(BlockUtil.getStateLog(PINE), BlockUtil.getStateLeaf(PINE)),
+            shrubs(BlockUtil.getStateLog(SPRUCE), BlockUtil.getStateLeaf(SPRUCE))
         );
     }
 

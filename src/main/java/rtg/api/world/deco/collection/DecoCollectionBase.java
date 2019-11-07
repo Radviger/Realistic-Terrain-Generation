@@ -23,8 +23,8 @@ public class DecoCollectionBase {
     public DecoCollectionBase(BiomeConfig config) {
 
         this.config = config;
-        this.decos = new ArrayList<DecoBase>();
-        this.rtgTrees = new ArrayList<TreeRTG>();
+        this.decos = new ArrayList<>();
+        this.rtgTrees = new ArrayList<>();
     }
 
     public DecoCollectionBase addDeco(DecoBase deco) {
@@ -74,10 +74,10 @@ public class DecoCollectionBase {
 
     public ArrayList<IBlockState> treeLogs() {
 
-        ArrayList<IBlockState> logBlocks = new ArrayList<IBlockState>();
+        ArrayList<IBlockState> logBlocks = new ArrayList<>();
 
-        for (int i = 0; i < rtgTrees.size(); i++) {
-            logBlocks.add(rtgTrees.get(i).getLogBlock());
+        for (TreeRTG rtgTree : rtgTrees) {
+            logBlocks.add(rtgTree.getLogBlock());
         }
 
         return logBlocks;
@@ -85,10 +85,10 @@ public class DecoCollectionBase {
 
     public ArrayList<IBlockState> treeLeaves() {
 
-        ArrayList<IBlockState> leafBlocks = new ArrayList<IBlockState>();
+        ArrayList<IBlockState> leafBlocks = new ArrayList<>();
 
-        for (int i = 0; i < rtgTrees.size(); i++) {
-            leafBlocks.add(rtgTrees.get(i).getLeavesBlock());
+        for (TreeRTG rtgTree : rtgTrees) {
+            leafBlocks.add(rtgTree.getLeavesBlock());
         }
 
         return leafBlocks;

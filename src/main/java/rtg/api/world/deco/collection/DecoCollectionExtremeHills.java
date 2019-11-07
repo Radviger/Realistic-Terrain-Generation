@@ -9,6 +9,10 @@ import rtg.api.world.deco.DecoTree;
 import rtg.api.world.deco.helper.DecoHelper5050;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTG;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTGPinusNigra;
+import ru.craftlogic.common.block.BlockPlanks2;
+
+import static net.minecraft.block.BlockPlanks.EnumType.SPRUCE;
+import static ru.craftlogic.common.block.BlockPlanks2.PlanksType2.PINE;
 
 
 /**
@@ -51,8 +55,8 @@ public class DecoCollectionExtremeHills extends DecoCollectionBase {
 
     protected DecoHelper5050 nigraDecos(int maxY, int minTrunkSize, int maxTrunkSize, int minCrownSize, int maxCrownSize) {
         return new DecoHelper5050(
-            nigraTrees(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState(), maxY, minTrunkSize, maxTrunkSize, minCrownSize, maxCrownSize),
-            nigraTrees(BlockUtil.getStateLog(EnumType.SPRUCE), BlockUtil.getStateLeaf(EnumType.SPRUCE), maxY, minTrunkSize, maxTrunkSize, minCrownSize, maxCrownSize)
+            nigraTrees(BlockUtil.getStateLog(PINE), BlockUtil.getStateLeaf(PINE), maxY, minTrunkSize, maxTrunkSize, minCrownSize, maxCrownSize),
+            nigraTrees(BlockUtil.getStateLog(SPRUCE), BlockUtil.getStateLeaf(SPRUCE), maxY, minTrunkSize, maxTrunkSize, minCrownSize, maxCrownSize)
         );
     }
 }

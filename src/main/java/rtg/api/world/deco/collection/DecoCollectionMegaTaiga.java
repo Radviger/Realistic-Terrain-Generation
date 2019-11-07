@@ -13,6 +13,7 @@ import rtg.api.world.gen.feature.tree.rtg.TreeRTG;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTGPiceaPungens;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTGPiceaSitchensis;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTGPinusPonderosa;
+import ru.craftlogic.common.block.BlockPlanks2;
 
 
 /**
@@ -59,24 +60,24 @@ public class DecoCollectionMegaTaiga extends DecoCollectionBase {
         spruceTrees.setMaxY(100);
 
         TreeRTG ponderosaTree = new TreeRTGPinusPonderosa();
-        ponderosaTree.setLogBlock(Blocks.LOG.getDefaultState());
-        ponderosaTree.setLeavesBlock(Blocks.LEAVES.getDefaultState());
+        ponderosaTree.setLogBlock(BlockUtil.getStateLog(BlockPlanks2.PlanksType2.PINE));
+        ponderosaTree.setLeavesBlock(BlockUtil.getStateLeaf(BlockPlanks2.PlanksType2.PINE));
         ponderosaTree.setMinTrunkSize(11);
         ponderosaTree.setMaxTrunkSize(21);
         ponderosaTree.setMinCrownSize(15);
         ponderosaTree.setMaxCrownSize(29);
         this.addTree(ponderosaTree);
 
-        DecoTree oakPines = new DecoTree(ponderosaTree);
-        oakPines.setStrengthNoiseFactorXForLoops(true);
-        oakPines.setStrengthFactorForLoops(4f);
-        oakPines.setTreeType(TreeType.RTG_TREE);
-        oakPines.setTreeCondition(TreeCondition.ALWAYS_GENERATE);
-        oakPines.setTreeConditionChance(1);
-        oakPines.setMaxY(100);
+        DecoTree pine = new DecoTree(ponderosaTree);
+        pine.setStrengthNoiseFactorXForLoops(true);
+        pine.setStrengthFactorForLoops(4f);
+        pine.setTreeType(TreeType.RTG_TREE);
+        pine.setTreeCondition(TreeCondition.ALWAYS_GENERATE);
+        pine.setTreeConditionChance(1);
+        pine.setMaxY(100);
 
         DecoHelperRandomSplit decoHelperRandomSplit = new DecoHelperRandomSplit();
-        decoHelperRandomSplit.decos = new DecoBase[]{spruceTrees, smallPines, oakPines};
+        decoHelperRandomSplit.decos = new DecoBase[]{spruceTrees, smallPines, pine};
         decoHelperRandomSplit.chances = new int[]{8, 2, 2};
         this.addDeco(decoHelperRandomSplit);
     }
